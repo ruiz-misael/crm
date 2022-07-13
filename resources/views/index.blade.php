@@ -10,8 +10,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script type='text/javascript' src='{{ asset('js/jquery.js') }}'></script>
-       <script src="{{ asset('js/main.js') }}"></script>
-     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="{{ asset('js/main.js') }}"></script>
+     <script src="{{ asset('js/app.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
 
     <body className='snippet-body'>
@@ -24,7 +29,7 @@
             <header class="header" id="header">
                <div class="header_toggle"> <i class='bx bx-menu bx-sm' id="header-toggle"></i> </div><img src="{{ asset('images/logo.png') }}" width="80px">
              
-                <div class="d-flex justify-content-end" valign="middle"><div >USUARIO</div> <div class="header_img"><img src="{{ asset('images/user.svg') }}" alt=""></div></div>
+                <div class="d-flex justify-content-end" valign="middle"><div >{{ Session::get('nombre').' '.Session::get('apellido') }} </div> <div class="header_img"><img src="{{ asset('images/user.svg') }}" alt=""></div></div>
             </header>
             
             <div class="l-navbar" id="nav-bar" >
@@ -40,7 +45,7 @@
                                 <a href="#" class="nav_link" id="eventos"> <i class='bx bx-folder nav_icon bx-sm'></i> <span class="nav_name">Proximos Eventos</span> </a> 
                                 <!--<a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->
                             </div>
-                        </div><a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon bx-sm'></i> <span class="nav_name">Cerrar Sesion</span> </a>
+                        </div><a href="{{ url('logout') }}" class="nav_link"> <i class='bx bx-log-out nav_icon bx-sm'></i> <span class="nav_name">Cerrar Sesion</span> </a>
                     </nav>
                 </div>
                 <!--Container Main start-->
@@ -54,6 +59,6 @@
         <!--Container Main end-->
         <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
         <script type='text/javascript' src="{{ asset('js/styles.js') }}"></script>
-  
+         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
   </html>

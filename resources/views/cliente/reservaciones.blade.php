@@ -4,167 +4,116 @@
                 <div class="d-flex justify-content-between">
   <div class="mr-auto p-2"><center><legend>Registro de Reservas</legend></center></div>
 
-  <div class="p-2 col-lg-2"><input type="date" class="form-control" name="fecha" value=""></div>
+  <div class="p-2 col-lg-2"><input type="date" class="form-control" id="fecha" name="fecha" value="{{ Carbon\Carbon::parse('now')->format('Y-m-d')}}"></div>
 </div>
                 <hr>
-                <div class="card-body">
-                <div class="tabset">
-  <!-- Tab 1 -->
-  <input type="radio" name="tabset" id="tab1" aria-controls="Piscina" checked>
-  <label for="tab1">Piscina</label>
-  <!-- Tab 2 -->
-  <input type="radio" name="tabset" id="tab2" aria-controls="Gym">
-  <label for="tab2">Gym</label>
-  <!-- Tab 3 -->
-  <input type="radio" name="tabset" id="tab3" aria-controls="canchas">
-  <label for="tab3">Cancha de Futbol</label>
-  <!-- Tab 3 -->
-  <input type="radio" name="tabset" id="tab4" aria-controls="Functional">
-  <label for="tab4">Functional</label>
-  
-  <div class="tab-panels">
-    <section id="Piscina" class="tab-panel">
-     <table class="table">
-         <tr><th>Turno</th>
-            <th>Carril 1</th>
-            <th>Carril 2</th>
-            <th>Carril 3</th>
-            <th>Carril 4</th>
-            <th>Carril 5</th>
-            <th>Carril 6</th>
-            <th>Carril 7</th>
-            <th>Carril 8</th>
-            <th>Carril 9</th>
-            <th>Carril 10</th>
+             
+   <div class="wrapper my-0">
+  <div class="tabs">
+     @foreach($areas as $a) 
+    <div class="tab">
+      <input type="radio" name="css-tabs" id="{{ $a->id_areas }}" @if($a->id_areas == 1) checked @endif class="tab-switch">
+      <label for="{{ $a->id_areas }}" class="tab-label">{{ $a->nombre }}</label>
+      <div class="tab-content"> <table class="table table-condensed table-sm text-center table-striped">
+      @php
+        $ambientes=DB::Table('ambientes_areas')
+        ->where('id_areas','=',$a->id_areas)
+        ->get();
+        @endphp
+         <tr class="bg-info text-white">
+          <th></th>
+          @foreach($ambientes as $amb)
+          <th>{{ $amb->ambiente }}</th>
+        @endforeach</tr>
+        @foreach($turnos as $t)        
+        <tr>
+          <th >{{ "De ".$t->desde." a ".$t->desde }}</th>
+          @foreach($ambientes as $amb)
+          <th id="{{ $t->idturnos.'-'.$amb->id_ambientes }}">
+            <input type="checkbox"  class="reservar" name="turno[]" value="{{ $t->idturnos.'-'.$amb->id_ambientes }}">Disponible</th>
+          @endforeach
         </tr>
-         <tr><th>6:00 a 6:50</th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-        </tr>
-          <tr><th>7:00 a 7:50</th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-        </tr>
-          <tr><th>8:00 a 8:50</th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-            <th><input type="checkbox"></th>
-        </tr>
-     </table>    
-  </section>
-
-  
+        @endforeach
+     </table>    </div>
+    </div>   
+    @endforeach
   </div>
-  
+
 </div>
-
-
                 </div>
             </div>
-        </div>
-   
-<style>
-    .tabset > input[type="radio"] {
-  position: absolute;
-  left: -200vw;
-}
+       
 
-.tabset .tab-panel {
+
+<style>
+    .wrapper {
+   width: 100%;
+  margin: 0 auto;
+}
+.tabs {
+  position: relative;
+  margin: 3rem 0;
+  
+  height: 14.75rem;
+}
+.tabs::before,
+.tabs::after {
+  content: "";
+  display: table;
+}
+.tabs::after {
+  clear: both;
+}
+.tab {
+  float: left;
+}
+.tab-switch {
   display: none;
 }
-
-.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
-.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
-.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
-.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
-.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
-.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
-  display: block;
-}
-
-/*
- Styling
-*/
-body {
-  font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
-  color: #333;
-  font-weight: 300;
-}
-
-.tabset > label {
+.tab-label {
   position: relative;
-  display: inline-block;
-  padding: 15px 15px 25px;
-  border: 1px solid transparent;
-  border-bottom: 0;
+  display: block;
+  line-height: 2.75em;
+  height: 3em;
+  padding: 0 1.618em;
+  background: #4723D9;
+  border-right: 0.125rem groove white;
+  color: #fff;
   cursor: pointer;
-  font-weight: 600;
+  top: 0;
+  transition: all 0.25s;
 }
-
-.tabset > label::after {
-  content: "";
+.tab-label:hover {
+  top: -0.25rem;
+  transition: top 0.25s;
+}
+.tab-content {
+     width: 100%;
+  
   position: absolute;
-  left: 15px;
-  bottom: 10px;
-  width: 22px;
-  height: 4px;
-  background: #8d8d8d;
+  z-index: 1;
+  top: 2.75em;
+  left: 0;
+  padding: 1.618rem;
+  background: #fff;
+  color: #2c3e50;
+  border-bottom: 0.25rem solid #bdc3c7;
+  opacity: 0;
+  transition: all 0.35s;
 }
-
-.tabset > label:hover,
-.tabset > input:focus + label {
-  color: #06c;
+.tab-switch:checked + .tab-label {
+  background: #fff;
+  color: #2c3e50;
+  border-bottom: 0;
+  border-right: 0.125rem solid #fff;
+  transition: all 0.35s;
+  z-index: 1;
+  top: -0.0625rem;
 }
-
-.tabset > label:hover::after,
-.tabset > input:focus + label::after,
-.tabset > input:checked + label::after {
-  background: #06c;
+.tab-switch:checked + label + .tab-content {
+  z-index: 2;
+  opacity: 1;
+  transition: all 0.35s;
 }
-
-.tabset > input:checked + label {
-  border-color: #ccc;
-  border-bottom: 1px solid #fff;
-  margin-bottom: -1px;
-}
-
-.tab-panel {
-  padding: 30px 0;
-  border-top: 1px solid #ccc;
-}
-
-/*
- Demo purposes only
-*/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-
 
 </style>

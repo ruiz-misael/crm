@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('login','LoginController@login');
+Route::get('logout','LoginController@logout');
 Route::get('/', function () {
     return view('login');
 });
 
-Route::get('cliente', function () {
-    return view('index');
-});
+Route::get('cliente','ClienteController@cliente');
 Route::get('reservas','ClienteController@reservas');
+Route::get('reservar','ClienteController@reservar');
 Route::get('chatbot','ClienteController@chatbot');
 Route::get('informacion','ClienteController@informacion');
 Route::get('dashboard', function () {
