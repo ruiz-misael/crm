@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('cliente','ClienteController@cliente');
 Route::get('dashboard','AdministradorCOntroller@index');
 Route::get('reservas','ClienteController@reservas');
+Route::get('reservar','ClienteController@reservar');
 Route::get('renovacion','ClienteController@renovacion');
 Route::get('pagos','ClienteController@pagos');
 Route::get('chatbot','ClienteController@chatbot');

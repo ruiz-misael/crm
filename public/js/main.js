@@ -102,7 +102,7 @@ $(document).on('click', '.reservar', function(){
 		  $.ajax({                 
        url: url,
        type: "GET",      
-     dataType: "html",
+     dataType: "json",
       data: {
                      fecha: fecha,
                      id: id,
