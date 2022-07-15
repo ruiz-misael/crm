@@ -35,7 +35,7 @@
           ->where('turno','=',$t->idturnos)
           ->where('fecha_reserva','=',$fecha)->first();
           @endphp
-          @if($fecha >= Carbon\Carbon::parse('now') || ($fecha >= Carbon\Carbon::parse('now') && $t->desde >= Carbon::parse('now')->format('H.i')) )
+          @if($fecha >= Carbon\Carbon::parse('now') || (Carbon\Carbon::parse('now') && $t->desde > Carbon\Carbon::parse('now')->format('H.i')) )
           <th id="{{ $t->idturnos.'-'.$amb->id_ambientes }}">
             @if(isset($consultaReserva)) 
              <b class="text-secondary">No Disponible</b>
