@@ -1,4 +1,5 @@
-@include('loader') 
+@include('loader')
+  @include('cliente.chatbot')  
 <html>
 <head>
     <meta charset='utf-8'>
@@ -13,23 +14,23 @@
     <script src="{{ asset('js/main.js') }}"></script>
      <script src="{{ asset('js/app.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
     </head>
-
+  
     <body className='snippet-body'>
 
         <body id="body-pd">
 
   <div class="cajaf">
-  <a href="#" class="btn_roundf" id="cliente_contacto" title="Contacta tu asistente virtual" >Contacta tu asistente virtual <img src="{{ asset('images/chat.svg') }}" width="40px"></a>
+  <a href="#" class="btn_roundf"  data-toggle="modal" data-target="#exampleModal" title="Contacta tu asistente virtual" >Contacta tu asistente virtual <img src="{{ asset('images/chat.svg') }}" width="40px"></a>
 </div>
             <header class="header" id="header">
-               <div class="header_toggle"> <i class='bx bx-menu bx-sm' id="header-toggle"></i> </div><img src="{{ asset('images/logo.png') }}" width="80px">
+               <div class="header_toggle" > <i class='bx bx-menu bx-sm' id="header-toggle"></i> </div><img src="{{ asset('images/logo.png') }}" width="80px">
              
-                <div class="d-flex justify-content-end" valign="middle"><div >{{ Session::get('nombre').' '.Session::get('apellido') }} </div> <div class="header_img"><img src="{{ asset('images/user.svg') }}" alt=""></div></div>
+                <div class="d-flex justify-content-end" valign="middle">
+                    <div valign="middle">{{ Session::get('nombre').' '.Session::get('apellido') }} </div> <div class="header_img"><img src="{{ asset('images/user.svg') }}" alt=""></div></div>
             </header>
             
             <div class="l-navbar" id="nav-bar" >
@@ -49,9 +50,12 @@
                     </nav>
                 </div>
                 <!--Container Main start-->
+
                 <div class="height-100 bg-light" id="app">
                     <div class="card my-3">
                   <div class="card-body" id="contenido">
+                <center class="my-2"><h3 class="text-primary">Bienvenid@</h3></center>
+                <center><img src="{{  asset('images/AF5.jpg') }} " width="860px;"></center>
   
                 </div>
             </div>
@@ -60,5 +64,6 @@
         <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
         <script type='text/javascript' src="{{ asset('js/styles.js') }}"></script>
          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </body>
   </html>

@@ -1,25 +1,34 @@
 $(document).ready(function(){
 
-
-$("#loader").show();
-	
-	$("#cliente_reservas").click(function(){
-	
+	function reservas(){
+		var fecha= $("#fecha").val();
+		$("#loading").show();
 		var url='reservas';
   
 		  $.ajax({                 
        url: url,
-       type: "GET",      
+       type: "GET",
+       data:{fecha:fecha},      
      dataType: "html",    
          beforeSend: function() {
            	$("#loader").show();
            },success:function(response){
            	$("#contenido").html(response);
-           		$("#loader").fadeOut();
+           		$("#loading").fadeOut();
+           		console.log(response);
       
            }
            })     
+	}
+	
+	$("#cliente_reservas").click(function(){
+	
+		reservas();
+	})
 
+	$(document).on('change', '#fecha',function(){
+	
+		reservas();
 	})
 
 	$("#cliente_informacion").click(function(){
@@ -31,10 +40,10 @@ $("#loader").show();
        type: "GET",      
      dataType: "html",    
          beforeSend: function() {
-           	$("#loader").show();
+           	$("#loading").show();
            },success:function(response){
            	$("#contenido").html(response);
-           		$("#loader").fadeOut();
+           		$("#loading").fadeOut();
      
            }
            })     
@@ -50,10 +59,28 @@ $("#loader").show();
        type: "GET",      
      dataType: "html",    
          beforeSend: function() {
-           	$("#loader").show();
+           	$("#loading").show();
            },success:function(response){
            	$("#contenido").html(response);
-           		$("#loader").fadeOut();
+           		$("#loading").fadeOut();
+     
+           }
+           })     
+
+	})
+	$("#cliente_pagos").click(function(){
+	
+		var url='pagos';
+  
+		  $.ajax({                 
+       url: url,
+       type: "GET",      
+     dataType: "html",    
+         beforeSend: function() {
+           	$("#loading").show();
+           },success:function(response){
+           	$("#contenido").html(response);
+           		$("#loading").fadeOut();
      
            }
            })     
@@ -82,10 +109,10 @@ $(document).on('click', '.reservar', function(){
                
                   },    
          beforeSend: function() {
-           	$("#loader").show();
+           	$("#loading").show();
            },success:function(response){
            	
-           		$("#loader").fadeOut();
+           		$("#loading").fadeOut();
            		console.log(response)
      			 Swal.fire('Reserva registrada!', '', 'success')
            }
@@ -100,6 +127,24 @@ $(document).on('click', '.reservar', function(){
 	
 
 }); 
+
+$(document).on('click', '#cliente_renovacion', function(){
+	$("#loading").show();
+		var url='renovacion';
+  
+		  $.ajax({                 
+       url: url,
+       type: "GET",      
+     dataType: "html",    
+         beforeSend: function() {
+           	$("#loader").show();
+           },success:function(response){
+           	$("#contenido").html(response);
+           		$("#loading").fadeOut();
+      
+           }
+           })   
+})
 	
 })
 

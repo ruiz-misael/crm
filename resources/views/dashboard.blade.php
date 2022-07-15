@@ -12,7 +12,9 @@
       <body id="body-pd">
         <header class="header" id="header">
           <div class="header_toggle"> <i class='bx bx-menu bx-sm' id="header-toggle"></i> </div><img src="{{ asset('images/logo.png') }}" width="120px">
-           <div class="d-flex justify-content-end" valign="middle"><div >USUARIO</div> <div class="header_img"><img src="{{ asset('images/user.svg') }}" alt=""></div></div>
+           
+                <div class="d-flex justify-content-end" valign="middle">
+                    <div valign="middle">{{ Session::get('nombre').' '.Session::get('apellido') }} </div> <div class="header_img"><img src="{{ asset('images/user.svg') }}" alt=""></div></div>
         </header>
         <div class="l-navbar" id="nav-bar">
           <nav class="nav">
@@ -27,7 +29,7 @@
                   <a href="#" class="nav_link"><i class='bx bxs-message-dots  bx-sm'></i> <span class="nav_name">Chatbox</span> </a> 
                   <!--<a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->
                 </div>
-              </div><a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon bx-sm'></i> <span class="nav_name">Cerrar Sesion</span> </a>
+              </div><a href="{{ url('logout') }}" class="nav_link"> <i class='bx bx-log-out nav_icon bx-sm'></i> <span class="nav_name">Cerrar Sesion</span> </a>
             </nav>
           </div>
           <!--Container Main start-->

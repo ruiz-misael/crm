@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Redirect;
 use DB;
 use Session;
+use Carbon\Carbon;
 class ClienteController extends Controller
 {
 	public function cliente(){
@@ -22,7 +23,13 @@ class ClienteController extends Controller
    		->get();
    		$turnos=DB::table('turnos')
    		->get();
-   	return view('cliente.reservaciones',["areas"=>$areas,"turnos"=>$turnos]);
+         $fecha=$request->fecha;
+         if(isset($fecha)){
+            $fecha=$fecha;
+         }else{
+            $fecha=Carbon::parse('now')->format('Y-m-d');
+         }
+   	return view('cliente.reservaciones',["areas"=>$areas,"turnos"=>$turnos,"fecha"=>$fecha]);
    }else{
    	return redirect::to('/');
    }
@@ -72,10 +79,19 @@ class ClienteController extends Controller
    }
    public function renovacion(Request $request){
    	if($request->ajax()){
-   	return view('cliente.chatbot');
+   	return view('cliente.renovaciones');
    }else{
    	return redirect::to('/');
    }
    }
+     public function pagos(Request $request){
+      if($request->ajax()){
+      return view('cliente.pagos');
+   }else{
+      return redirect::to('/');
+   }
+   }
+
+
 }
 

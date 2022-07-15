@@ -19,9 +19,12 @@ Route::get('/', function () {
 });
 
 Route::get('cliente','ClienteController@cliente');
+Route::get('dashboard','AdministradorCOntroller@index');
 Route::get('reservas','ClienteController@reservas');
-Route::get('reservar','ClienteController@reservar');
+Route::get('renovacion','ClienteController@renovacion');
+Route::get('pagos','ClienteController@pagos');
 Route::get('chatbot','ClienteController@chatbot');
+Route::get('promociones','ClienteController@promociones');
 Route::get('informacion','ClienteController@informacion');
 Route::get('dashboard', function () {
     return view('dashboard');

@@ -4,10 +4,10 @@
                 <div class="d-flex justify-content-between">
   <div class="mr-auto p-2"><center><legend>Registro de Reservas</legend></center></div>
 
-  <div class="p-2 col-lg-2"><input type="date" class="form-control" id="fecha" name="fecha" value="{{ Carbon\Carbon::parse('now')->format('Y-m-d')}}"></div>
+  <div class="p-2 col-lg-2"><input type="date" class="form-control" id="fecha" name="fecha" min="{{ Carbon\Carbon::parse('now')->format('Y-m-d')}}" value="{{ Carbon\Carbon::parse('now')->format('Y-m-d')}}"></div>
 </div>
                 <hr>
-             
+    
    <div class="wrapper my-0">
   <div class="tabs">
      @foreach($areas as $a) 
@@ -26,11 +26,23 @@
           <th>{{ $amb->ambiente }}</th>
         @endforeach</tr>
         @foreach($turnos as $t)        
-        <tr>
+        <tr style="white-space: nowrap;">
           <th >{{ "De ".$t->desde." a ".$t->desde }}</th>
           @foreach($ambientes as $amb)
+          @php
+          $consultaReserva=DB::table('reservas')
+          ->where('id_ambiente','=',$amb->id_ambientes)
+          ->where('turno','=',$t->idturnos)
+          ->where('fecha_reserva','=',$fecha)->first();
+          @endphp
+          @if($fecha >= Carbon\Carbon::parse('now') || ($fecha >= Carbon\Carbon::parse('now') && $t->desde >= Carbon::parse('now')->format('H.i')) )
           <th id="{{ $t->idturnos.'-'.$amb->id_ambientes }}">
-            <input type="checkbox"  class="reservar" name="turno[]" value="{{ $t->idturnos.'-'.$amb->id_ambientes }}">Disponible</th>
+            @if(isset($consultaReserva)) 
+             <b class="text-secondary">No Disponible</b>
+            @else 
+            <b>Disponible</b> <input type="checkbox"  class="reservar" name="turno[]" value="{{ $t->idturnos.'-'.$amb->id_ambientes }}">@endif </th>
+
+            @endif
           @endforeach
         </tr>
         @endforeach

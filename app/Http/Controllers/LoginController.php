@@ -27,12 +27,18 @@ class LoginController extends Controller
     		->first();
 
     		$request->session()->put('id_usuario', $auth->idusuario);
+            $request->session()->put('id_persona', $persona->idpersona);
     		$request->session()->put('tipo_usuario', $auth->tipo_usuario);
     		$request->session()->put('nombre', $persona->cnom);
     		$request->session()->put('activa', true);
     		$request->session()->put('apellido', $persona->capepa);
 			Alert::success('', 'Bienvenido');
+            if($auth->tipo_usuario == 3){
     		return redirect::to('cliente');
+            }
+            if($auth->tipo_usuario == 1){
+            return redirect::to('dashboard');
+            }
     		
     	}else{
     		Alert::warning('Usuario no encontrado', 'revise sus datos');
