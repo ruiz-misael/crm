@@ -24,7 +24,7 @@ Route::get('reservas','ClienteController@reservas');
 Route::get('reservar','ClienteController@reservar');
 Route::get('renovacion','ClienteController@renovacion');
 Route::get('pagos','ClienteController@pagos');
-Route::get('chatbot','ClienteController@chatbot');
+Route::get('chatbot','FuncionesController@chatbot');
 Route::get('promociones','ClienteController@promociones');
 Route::get('informacion','ClienteController@informacion');
 Route::get('dashboard', function () {

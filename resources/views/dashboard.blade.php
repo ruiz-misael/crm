@@ -29,7 +29,7 @@
                   <a href="#" class="nav_link"><i class='bx bxs-message-dots  bx-sm'></i> <span class="nav_name">Chatbox</span> </a> 
                   <!--<a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->
                 </div>
-              </div><a href="{{ url('logout') }}" class="nav_link"> <i class='bx bx-log-out nav_icon bx-sm'></i> <span class="nav_name">Cerrar Sesion</span> </a>
+              </div><a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon bx-sm'></i> <span class="nav_name">Cerrar Sesion</span> </a>
             </nav>
           </div>
           <!--Container Main start-->

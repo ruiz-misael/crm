@@ -13,6 +13,7 @@ $(document).ready(function(){
          beforeSend: function() {
            	$("#loader").show();
            },success:function(response){
+           	$("#fecha").val(response.fecha);
            	$("#contenido").html(response);
            		$("#loading").fadeOut();
            		console.log(response);
@@ -111,7 +112,7 @@ $(document).on('click', '.reservar', function(){
          beforeSend: function() {
            	$("#loading").show();
            },success:function(response){
-           	
+           		$("#fecha").val(response.fecha)
            		$("#loading").fadeOut();
            		console.log(response)
      			 Swal.fire('Reserva registrada!', '', 'success')
@@ -144,6 +145,56 @@ $(document).on('click', '#cliente_renovacion', function(){
       
            }
            })   
+})
+
+$(document).on('submit', '#chatbot', function(event){
+	event.preventDefault();
+	var mensajes=$("#mensaje").val();
+	var fecha= new Date().toLocaleString();
+	$("#mensaje").val('');
+	var cliente1='<div class="row my-2"> <div class="col-lg-10" id="enviado"><p>'+mensajes+'</p>';
+	var cliente2='<i class="text-secondary fechas">'+fecha+'</i></div>';
+	var cliente3=' <div class="col-lg-2" ><img src="images/user.svg"><p>Tu</p></div></div>';
+	$(".modal-body").append(cliente1+cliente2+cliente3);
+	var url='chatbot';
+	 $.ajax({                 
+       url: url,
+       type: "GET",      
+     dataType: "json",
+     data:{
+     	mensaje:mensajes
+     },    
+         beforeSend: function() {
+           	$("#loader").show();
+           },success:function(response){
+
+           	var fecha= new Date().toLocaleString();
+			$("#mensaje").val('');
+			console.log(response)
+			var activin=response.respuesta;
+			var asistente1=' <div class="row my-2"> <div class="col-lg-2" ><img src="images/activin.svg"><p>Activin</p></div>';
+			var asistente2=' <div class="col-lg-10" id="recibido"><p>'+activin+'</p>';
+			var asistente3='<i class="text-secondary fechas">'+fecha+'</i></div></div>';
+           	$(".modal-body").append(asistente1+asistente2+asistente3);
+           	$('#modal').animate({ scrollTop: $('#modal .modal-dialog').height() }, 500);
+           	$("#loading").fadeOut();
+
+           }
+           })  
+	
+})
+
+$(document).on('change', '#tipo_membresia', function(event){
+var costo=$("#tipo_membresia option:selected").attr("costo");
+var tiempo=$("#tipo_membresia option:selected").attr("tiempo");
+var monto_cuotas=costo/tiempo;
+
+
+// Añades los meses
+
+let fecha_fin = moment().add(tiempo, 'months').format('YYYY-MM-DD')
+console.log(fecha_fin);
+
 })
 	
 })

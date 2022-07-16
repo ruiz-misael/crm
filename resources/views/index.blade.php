@@ -1,5 +1,5 @@
 @include('loader')
-  @include('cliente.chatbot')  
+
 <html>
 <head>
     <meta charset='utf-8'>
@@ -14,12 +14,12 @@
     <script src="{{ asset('js/main.js') }}"></script>
      <script src="{{ asset('js/app.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
     </head>
   
-    <body className='snippet-body'>
+
 
         <body id="body-pd">
 
@@ -28,7 +28,7 @@
 </div>
             <header class="header" id="header">
                <div class="header_toggle" > <i class='bx bx-menu bx-sm' id="header-toggle"></i> </div><img src="{{ asset('images/logo.png') }}" width="80px">
-             
+               
                 <div class="d-flex justify-content-end" valign="middle">
                     <div valign="middle">{{ Session::get('nombre').' '.Session::get('apellido') }} </div> <div class="header_img"><img src="{{ asset('images/user.svg') }}" alt=""></div></div>
             </header>
@@ -50,18 +50,19 @@
                     </nav>
                 </div>
                 <!--Container Main start-->
-
+ @include('cliente.chatbot')  
                 <div class="height-100 bg-light" id="app">
                     <div class="card my-3">
                   <div class="card-body" id="contenido">
                 <center class="my-2"><h3 class="text-primary">Bienvenid@</h3></center>
                 <center><img src="{{  asset('images/AF5.jpg') }} " width="860px;"></center>
-  
+               
                 </div>
             </div>
         </div>
         <!--Container Main end-->
-        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+ 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script type='text/javascript' src="{{ asset('js/styles.js') }}"></script>
          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

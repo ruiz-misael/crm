@@ -24,11 +24,8 @@ class ClienteController extends Controller
    		$turnos=DB::table('turnos')
    		->get();
          $fecha=$request->fecha;
-         if(isset($fecha)){
-            $fecha=$fecha;
-         }else{
-            $fecha=Carbon::parse('now')->format('Y-m-d');
-         }
+       
+  
    	return view('cliente.reservaciones',["areas"=>$areas,"turnos"=>$turnos,"fecha"=>$fecha]);
    }else{
    	return redirect::to('/');
@@ -50,9 +47,9 @@ class ClienteController extends Controller
        $reserva->save();
 
        if($reserva){
-         return json_encode(["reserva"=>"registrada"]);
+         return json_encode(["reserva"=>"registrada","fecha"=>$fecha]);
        }else{
-          return json_encode(["reserva"=>"no registrada"]);
+          return json_encode(["reserva"=>"no registrada","fecha"=>$fecha]);
        }
 
       
@@ -79,7 +76,10 @@ class ClienteController extends Controller
    }
    public function renovacion(Request $request){
    	if($request->ajax()){
-   	return view('cliente.renovaciones');
+      $tipo_membresia=DB::table("tipo_membresia")
+      ->get();
+
+   	return view('cliente.renovaciones',["tipo_membresia"=>$tipo_membresia]);
    }else{
    	return redirect::to('/');
    }
