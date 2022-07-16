@@ -21,6 +21,24 @@ $(document).ready(function(){
            }
            })     
 	}
+
+  function informacion(){
+
+    var url='informacion';
+  
+      $.ajax({                 
+       url: url,
+       type: "GET",      
+     dataType: "html",    
+         beforeSend: function() {
+             $("#loading").show();
+           },success:function(response){
+             $("#contenido").html(response);
+               $("#loading").fadeOut();
+     
+           }
+           })     
+  }
 	
 	$("#cliente_reservas").click(function(){
 	
@@ -34,21 +52,7 @@ $(document).ready(function(){
 
 	$("#cliente_informacion").click(function(){
 	
-		var url='informacion';
-  
-		  $.ajax({                 
-       url: url,
-       type: "GET",      
-     dataType: "html",    
-         beforeSend: function() {
-           	$("#loading").show();
-           },success:function(response){
-           	$("#contenido").html(response);
-           		$("#loading").fadeOut();
-     
-           }
-           })     
-
+    informacion();
 	})
 
 	$("#cliente_contacto").click(function(){
@@ -186,15 +190,27 @@ $(document).on('submit', '#chatbot', function(event){
 
 $(document).on('change', '#tipo_membresia', function(event){
 var costo=$("#tipo_membresia option:selected").attr("costo");
-var tiempo=$("#tipo_membresia option:selected").attr("tiempo");
+var tiempo=parseInt($("#tipo_membresia option:selected").attr("tiempo"));
+var fecha_iniciO=$("#fecha_inicio").val();
 var monto_cuotas=costo/tiempo;
-
+console.log(tiempo);
 
 // Añades los meses
 
-let fecha_fin = moment().add(tiempo, 'months').format('YYYY-MM-DD')
-console.log(fecha_fin);
+let fecha_fin = moment(fecha_iniciO).add(tiempo, 'M').format('YYYY-MM-DD')
+$("#fecha_vencimiento").val(fecha_fin);
+$("#numero_cuotas").val(tiempo);
+$("#monto_cuotas").val(monto_cuotas);
+$("#total").val(costo);
 
+
+})
+
+$(document).on('submit', '#renovacion', function(event){
+      event.preventDefault();
+
+      var datos=$("#renovacion").serialize();
+      console.log(datos);
 })
 	
 })

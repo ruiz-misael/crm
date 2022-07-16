@@ -9,6 +9,7 @@
      </div>
             </div></div>
             <div class="col-lg-12">
+              <form id="renovacion">
   <div class="row">
     <div class="col-lg-3">
 <label>Seleccione tipo membresia</label>
@@ -24,7 +25,7 @@
   <div class="col-lg-2"><label>N° Cuotas</label><input name="numero_cuotas" class="form-control" id="numero_cuotas" readonly></div>
    <div class="col-lg-2"><label>Monto Cuotas</label><input name="monto_cuotas" class="form-control" id="monto_cuotas" readonly></div>
   <div class="col-lg-2"><label>Monto</label><input name="total" class="form-control" id="total" readonly></div>
-  <div class="col-lg-4"><button class="btn my-3 btn-primary btn-block">Renovar</button></div>
-</div>
+  <div class="col-lg-4"><button type="submit" class="btn my-3 btn-primary btn-block">Renovar</button></div>
+</div></form>
  
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Reservas;
+use App\Membresias;
 use Illuminate\Http\Request;
 use Redirect;
 use DB;
@@ -82,6 +83,22 @@ class ClienteController extends Controller
    	return view('cliente.renovaciones',["tipo_membresia"=>$tipo_membresia]);
    }else{
    	return redirect::to('/');
+   }
+   }
+      public function renovar(Request $request){
+    if($request->ajax()){
+    $tipo_membresia=$request->tipo_membresia;
+$id_persona=Session::get('id_persona');
+$fecha_inicio=Carbon::parse($request->fecha_inicio)->format('Y-m-d');
+$fecha_fin=Carbon::parse($request->fecha_vencimiento)->format('Y-m-d');
+$monto=$request->monto;
+$id_asesor=$request->id_asesor;
+$numero_cuotas=$request->numero_cuotas;
+$pago_inicial=$request->pago_inicial
+
+      return view('cliente.informacion');
+   }else{
+    return redirect::to('/');
    }
    }
      public function pagos(Request $request){

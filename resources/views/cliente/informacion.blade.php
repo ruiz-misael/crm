@@ -94,7 +94,8 @@
         	@endforeach
         	<hr>
         	<div class="row p-3">
-        	<center><h3>Tu membresia tiene @if($restantes > 0 ) <b class="text-primary">{{ $restantes}}</b> @else <b class="text-warning">0 </b>@endif dias restantes <button class="btn btn-primary " id="cliente_renovacion">Renovar</button></h3></center>
+        	<center><h3>Tu membresia tiene @if($restantes > 0 ) <b class="text-primary">{{ $restantes}}</b> @else <b class="text-warning">0 </b>@endif dias restantes 
+                @if($restantes > 0 ) @else <button class="btn btn-primary " id="cliente_renovacion">Renovar</button> @endif</h3></center>
         </div>
     </div>
 </div>
